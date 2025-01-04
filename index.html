@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURATOR - Cyberpunk Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-yellow: #ffee00;
+            --neon-red: #ff0044;
+            --cyber-black: #0a0a0f;
+        }
+
+        body {
+            background-color: var(--cyber-black);
+            color: var(--neon-yellow);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+            background-image: 
+                linear-gradient(45deg, #1a1a1f 25%, transparent 25%),
+                linear-gradient(-45deg, #1a1a1f 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #1a1a1f 75%),
+                linear-gradient(-45deg, transparent 75%, #1a1a1f 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .cyber-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-bottom: 1px solid var(--neon-yellow);
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .datetime {
+            color: var(--neon-yellow);
+            font-size: 0.8em;
+            text-shadow: 0 0 5px var(--neon-yellow);
+        }
+
+        .user-info {
+            color: var(--neon-red);
+            font-size: 0.8em;
+            text-shadow: 0 0 5px var(--neon-red);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-yellow); }
+            20% { transform: translate(-2px, 2px); text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000; }
+            40% { transform: translate(-2px, -2px); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-yellow); }
+            60% { transform: translate(2px, 2px); text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000; }
+            80% { transform: translate(2px, -2px); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-yellow); }
+            100% { transform: translate(0); text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-yellow); }
+        }
+
+        .title {
+            font-size: min(4em, 15vw); /* Responsive font size */
+            color: var(--neon-yellow);
+            text-shadow: 
+                0 0 10px var(--neon-yellow),
+                0 0 20px var(--neon-yellow),
+                0 0 40px var(--neon-yellow);
+            animation: glitch 2s infinite;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            white-space: nowrap; /* Prevent title from breaking */
+            text-align: center;
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            color: var(--neon-red);
+            margin: 20px 0;
+            text-shadow: 0 0 10px var(--neon-red);
+            animation: pulse 2s infinite;
+        }
+
+        .cyber-button {
+            padding: 15px 30px;
+            background: var(--cyber-black);
+            border: 2px solid var(--neon-yellow);
+            color: var(--neon-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .cyber-button:hover {
+            background: var(--neon-yellow);
+            color: var(--cyber-black);
+            box-shadow: 
+                0 0 10px var(--neon-yellow),
+                0 0 20px var(--neon-yellow),
+                0 0 40px var(--neon-yellow);
+            transform: scale(1.05);
+        }
+
+        .description {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border: 1px solid var(--neon-yellow);
+            margin-top: 40px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 238, 0, 0.2);
+        }
+
+        .description h2 {
+            color: var(--neon-red);
+            margin: 20px 0;
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .testimonial {
+            border-left: 3px solid var(--neon-yellow);
+            padding-left: 20px;
+            margin: 15px 0;
+            animation: pulse 3s infinite;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid var(--neon-yellow);
+            background: rgba(255, 238, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 10vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-header">
+        <div class="datetime" id="datetime"></div>
+        <div class="user-info">USER: Curator100</div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">CURATOR</h1>
+        <p class="tagline">EDUCATION IS BOINGGG...</p>
+
+        <div class="buttons">
+            <button class="cyber-button" onclick="playSoundAndRedirect('trial.html')">7 days free trial</button>
+            <button class="cyber-button" onclick="playSoundAndRedirect('member.html')">Already a member</button>
+            <button class="cyber-button" onclick="playSoundAndRedirect('tutor.html')">Hire a tutor</button>
+        </div>
+
+        <div class="description">
+            <h2>What is Curator??</h2>
+            <p class="cyber-text">কিউরেটর হচ্ছেন তোমার বড় ভাই। ... তোমার উজ্জ্বল ভবিষ্যৎ ❤️❤️</p>
+
+            <h2>Testimonials</h2>
+            <div class="testimonial">"Curator helped me score better!" – Mahfuz</div>
+            <div class="testimonial">"Great support for personal growth!" – Tanvir</div>
+            <div class="testimonial">"Curator made learning fun!" – Sakib</div>
+            <div class="testimonial">"Best online educational platform." – Anika</div>
+            <div class="testimonial">"Highly recommended for students." – Farzana</div>
+
+            <h2>Why Curator?</h2>
+            <ul class="features">
+                <li>✔ Personalized Guidance</li>
+                <li>✔ 24/7 Support</li>
+                <li>✔ Daily Tests</li>
+                <li>✔ Expert Mentors</li>
+                <li>✔ Mental Health Support</li>
+                <li>✔ Affordable Pricing</li>
+                <li>✔ Guaranteed Success</li>
+            </ul>
+        </div>
+    </div>
+
+    <audio id="button-sound" src="button1.mp3"></audio>
+
+    <script>
+        function playSoundAndRedirect(url) {
+            const sound = document.getElementById('button-sound');
+            sound.play();
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1000);
+        }
+
+        // Update datetime with local time
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            const dateStr = now.toLocaleString('en-US', options).replace(',', '');
+            document.getElementById('datetime').textContent = dateStr + ' LOCAL';
+        }
+
+        // Update time immediately and then every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
